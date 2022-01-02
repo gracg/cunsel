@@ -115,7 +115,8 @@ public class DbHelper {
         sb.delete(0, sb.length());
         ////////////////////////////////
         sb.append("CREATE TABLE stats_basic(");
-        sb.append("companyName VARCHAR(200) PRIMARY KEY,");
+        sb.append("ticker VARCHAR(100) PRIMARY KEY,");
+        sb.append("companyName VARCHAR(200),");
         sb.append("marketcap BIGINT,");
         sb.append("week52high DOUBLE PRECISION,");
         sb.append("week52low DOUBLE PRECISION,");
