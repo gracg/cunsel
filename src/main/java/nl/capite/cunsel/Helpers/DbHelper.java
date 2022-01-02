@@ -711,4 +711,348 @@ public class DbHelper {
 
     }
 
+    public List<StatsBasic> getStatsBasic() throws SQLException {
+        var s = "SELECT " +
+                "ticker," +
+                "companyName," +
+                "marketcap," +
+                "week52high," +
+                "week52low," +
+                "week52highSplitAdjustOnly," +
+                "week52lowSplitAdjustOnly," +
+                "week52change," +
+                "sharesOutstanding," +
+                "floatNum," +
+                "avg10Volume," +
+                "avg30Volume," +
+                "day200MovingAvg," +
+                "day50MovingAvg," +
+                "employees," +
+                "ttmEPS," +
+                "ttmDividendRate," +
+                "dividendYield," +
+                "nextDividendDate," +
+                "exDividendDate," +
+                "nextEarningsDate," +
+                "peRatio," +
+                "beta," +
+                "maxChangePercent," +
+                "year5ChangePercent," +
+                "year2ChangePercent," +
+                "year1ChangePercent," +
+                "ytdChangePercent," +
+                "month6ChangePercent," +
+                "month3ChangePercent," +
+                "month1ChangePercent," +
+                "day30ChangePercent," +
+                "day5ChangePercent " +
+                "FROM stats_basic";
+
+        Statement stmt = this.con.createStatement();
+        ResultSet rs = stmt.executeQuery(s);
+        List<StatsBasic> ls = new ArrayList<>();
+        while (rs.next()) {
+            ls.add(
+                    new StatsBasic(
+                            rs.getString(1),
+                            rs.getString(2),
+                            rs.getLong(3),
+                            rs.getDouble(4),
+                            rs.getDouble(5),
+                            rs.getDouble(6),
+                            rs.getDouble(7),
+                            rs.getDouble(8),
+                            rs.getLong(9),
+                            rs.getLong(10),
+                            rs.getLong(11),
+                            rs.getLong(12),
+                            rs.getDouble(13),
+                            rs.getDouble(14),
+                            rs.getLong(15),
+                            rs.getDouble(16),
+                            rs.getDouble(17),
+                            rs.getDouble(18),
+                            rs.getString(19),
+                            rs.getString(20),
+                            rs.getString(21),
+                            rs.getDouble(22),
+                            rs.getDouble(23),
+                            rs.getDouble(24),
+                            rs.getDouble(25),
+                            rs.getDouble(26),
+                            rs.getDouble(27),
+                            rs.getDouble(28),
+                            rs.getDouble(29),
+                            rs.getDouble(30),
+                            rs.getDouble(31),
+                            rs.getDouble(32),
+                            rs.getDouble(33)
+                    )
+            );
+        }
+        return ls;
+    }
+
+    public HashMap<String,StatsBasic> getStatsBasicMap() throws SQLException {
+        var s = "SELECT " +
+                "ticker," +
+                "companyName," +
+                "marketcap," +
+                "week52high," +
+                "week52low," +
+                "week52highSplitAdjustOnly," +
+                "week52lowSplitAdjustOnly," +
+                "week52change," +
+                "sharesOutstanding," +
+                "floatNum," +
+                "avg10Volume," +
+                "avg30Volume," +
+                "day200MovingAvg," +
+                "day50MovingAvg," +
+                "employees," +
+                "ttmEPS," +
+                "ttmDividendRate," +
+                "dividendYield," +
+                "nextDividendDate," +
+                "exDividendDate," +
+                "nextEarningsDate," +
+                "peRatio," +
+                "beta," +
+                "maxChangePercent," +
+                "year5ChangePercent," +
+                "year2ChangePercent," +
+                "year1ChangePercent," +
+                "ytdChangePercent," +
+                "month6ChangePercent," +
+                "month3ChangePercent," +
+                "month1ChangePercent," +
+                "day30ChangePercent," +
+                "day5ChangePercent " +
+                "FROM stats_basic";
+
+        Statement stmt = this.con.createStatement();
+        ResultSet rs = stmt.executeQuery(s);
+        HashMap<String,StatsBasic> mp = new HashMap<>();
+        while (rs.next()) {
+            var t = new StatsBasic(
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getLong(3),
+                    rs.getDouble(4),
+                    rs.getDouble(5),
+                    rs.getDouble(6),
+                    rs.getDouble(7),
+                    rs.getDouble(8),
+                    rs.getLong(9),
+                    rs.getLong(10),
+                    rs.getLong(11),
+                    rs.getLong(12),
+                    rs.getDouble(13),
+                    rs.getDouble(14),
+                    rs.getLong(15),
+                    rs.getDouble(16),
+                    rs.getDouble(17),
+                    rs.getDouble(18),
+                    rs.getString(19),
+                    rs.getString(20),
+                    rs.getString(21),
+                    rs.getDouble(22),
+                    rs.getDouble(23),
+                    rs.getDouble(24),
+                    rs.getDouble(25),
+                    rs.getDouble(26),
+                    rs.getDouble(27),
+                    rs.getDouble(28),
+                    rs.getDouble(29),
+                    rs.getDouble(30),
+                    rs.getDouble(31),
+                    rs.getDouble(32),
+                    rs.getDouble(33)
+            );
+            mp.put(t.getGenericId(),t);
+        }
+        return mp;
+    }
+
+    public void insertStasBasic(List<StatsBasic> ls) throws SQLException {
+        var s = "INSERT INTO STATS_BASIC(" +
+                "ticker," +
+                "companyName," +
+                "marketcap," +
+                "week52high," +
+                "week52low," +
+                "week52highSplitAdjustOnly," +
+                "week52lowSplitAdjustOnly," +
+                "week52change," +
+                "sharesOutstanding," +
+                "floatNum," +
+                "avg10Volume," +
+                "avg30Volume," +
+                "day200MovingAvg," +
+                "day50MovingAvg," +
+                "employees," +
+                "ttmEPS," +
+                "ttmDividendRate," +
+                "dividendYield," +
+                "nextDividendDate," +
+                "exDividendDate," +
+                "nextEarningsDate," +
+                "peRatio," +
+                "beta," +
+                "maxChangePercent," +
+                "year5ChangePercent," +
+                "year2ChangePercent," +
+                "year1ChangePercent," +
+                "ytdChangePercent," +
+                "month6ChangePercent," +
+                "month3ChangePercent," +
+                "month1ChangePercent," +
+                "day30ChangePercent," +
+                "day5ChangePercent) " +
+                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        PreparedStatement pstmt = this.con.prepareStatement(s);
+        int c=0;
+        for(StatsBasic x:ls) {
+            if(c>=100) {
+                pstmt.executeBatch();
+                c = 0;
+            }
+            pstmt.setString(1,x.getTicker());
+            pstmt.setString(2,x.getCompanyName());
+            pstmt.setLong(3,x.getMarketcap());
+            pstmt.setDouble(4,x.getWeek52high());
+            pstmt.setDouble(5,x.getWeek52low());
+            pstmt.setDouble(6,x.getWeek52highSplitAdjustOnly());
+            pstmt.setDouble(7,x.getWeek52lowSplitAdjustOnly());
+            pstmt.setDouble(8,x.getWeek52change());
+            pstmt.setLong(9,x.getSharesOutstanding());
+            pstmt.setLong(10,x.getFloatNum());
+            pstmt.setLong(11,x.getAvg10Volume());
+            pstmt.setLong(12,x.getAvg30Volume());
+            pstmt.setDouble(13,x.getDay200MovingAvg());
+            pstmt.setDouble(14,x.getDay50MovingAvg());
+            pstmt.setLong(15,x.getEmployees());
+            pstmt.setDouble(16,x.getTtmEPS());
+            pstmt.setDouble(17,x.getTtmDividendRate());
+            pstmt.setDouble(18,x.getDividendYield());
+            pstmt.setString(19,x.getNextDividendDate());
+            pstmt.setString(20,x.getExDividendDate());
+            pstmt.setString(21,x.getNextEarningsDate());
+            pstmt.setDouble(22,x.getPeRatio());
+            pstmt.setDouble(23,x.getBeta());
+            pstmt.setDouble(24,x.getMaxChangePercent());
+            pstmt.setDouble(25,x.getYear5ChangePercent());
+            pstmt.setDouble(26,x.getYear2ChangePercent());
+            pstmt.setDouble(27,x.getYear1ChangePercent());
+            pstmt.setDouble(28,x.getYtdChangePercent());
+            pstmt.setDouble(29,x.getMonth6ChangePercent());
+            pstmt.setDouble(30,x.getMonth3ChangePercent());
+            pstmt.setDouble(31,x.getMonth1ChangePercent());
+            pstmt.setDouble(32,x.getDay30ChangePercent());
+            pstmt.setDouble(33,x.getDay5ChangePercent());
+            pstmt.addBatch();
+            c++;
+        }
+        pstmt.executeBatch();
+    }
+
+    public void updateStatsBasic(List<StatsBasic> ls) throws SQLException {
+        var s = "UPDATE STATS_BASIC SET " +
+                "companyName=?," +
+                "marketcap=?," +
+                "week52high=?," +
+                "week52low=?," +
+                "week52highSplitAdjustOnly=?," +
+                "week52lowSplitAdjustOnly=?," +
+                "week52change=?," +
+                "sharesOutstanding=?," +
+                "floatNum=?," +
+                "avg10Volume=?," +
+                "avg30Volume=?," +
+                "day200MovingAvg=?," +
+                "day50MovingAvg=?," +
+                "employees=?," +
+                "ttmEPS=?," +
+                "ttmDividendRate=?," +
+                "dividendYield=?," +
+                "nextDividendDate=?," +
+                "exDividendDate=?," +
+                "nextEarningsDate=?," +
+                "peRatio=?," +
+                "beta=?," +
+                "maxChangePercent=?," +
+                "year5ChangePercent=?," +
+                "year2ChangePercent=?," +
+                "year1ChangePercent=?," +
+                "ytdChangePercent=?," +
+                "month6ChangePercent=?," +
+                "month3ChangePercent=?," +
+                "month1ChangePercent=?," +
+                "day30ChangePercent=?," +
+                "day5ChangePercent=? " +
+                "WHERE ticker=?";
+
+        PreparedStatement pstmt = this.con.prepareStatement(s);
+        int c=0;
+        for(StatsBasic x:ls) {
+            if(c>=100) {
+                pstmt.executeBatch();
+                c = 0;
+            }
+            pstmt.setString(1,x.getCompanyName());
+            pstmt.setLong(2,x.getMarketcap());
+            pstmt.setDouble(3,x.getWeek52high());
+            pstmt.setDouble(4,x.getWeek52low());
+            pstmt.setDouble(5,x.getWeek52highSplitAdjustOnly());
+            pstmt.setDouble(6,x.getWeek52lowSplitAdjustOnly());
+            pstmt.setDouble(7,x.getWeek52change());
+            pstmt.setLong(8,x.getSharesOutstanding());
+            pstmt.setLong(9,x.getFloatNum());
+            pstmt.setLong(10,x.getAvg10Volume());
+            pstmt.setLong(11,x.getAvg30Volume());
+            pstmt.setDouble(12,x.getDay200MovingAvg());
+            pstmt.setDouble(13,x.getDay50MovingAvg());
+            pstmt.setLong(14,x.getEmployees());
+            pstmt.setDouble(15,x.getTtmEPS());
+            pstmt.setDouble(16,x.getTtmDividendRate());
+            pstmt.setDouble(17,x.getDividendYield());
+            pstmt.setString(18,x.getNextDividendDate());
+            pstmt.setString(19,x.getExDividendDate());
+            pstmt.setString(20,x.getNextEarningsDate());
+            pstmt.setDouble(21,x.getPeRatio());
+            pstmt.setDouble(22,x.getBeta());
+            pstmt.setDouble(23,x.getMaxChangePercent());
+            pstmt.setDouble(24,x.getYear5ChangePercent());
+            pstmt.setDouble(25,x.getYear2ChangePercent());
+            pstmt.setDouble(26,x.getYear1ChangePercent());
+            pstmt.setDouble(27,x.getYtdChangePercent());
+            pstmt.setDouble(28,x.getMonth6ChangePercent());
+            pstmt.setDouble(29,x.getMonth3ChangePercent());
+            pstmt.setDouble(30,x.getMonth1ChangePercent());
+            pstmt.setDouble(31,x.getDay30ChangePercent());
+            pstmt.setDouble(32,x.getDay5ChangePercent());
+            pstmt.setString(33,x.getTicker());
+            pstmt.addBatch();
+            c++;
+        }
+        pstmt.executeBatch();
+    }
+
+    public void deleteStatsBasic(List<String> ls) throws SQLException {
+        var s = "DELETE FROM STATS_BASIC WHERE ticker=?";
+
+        PreparedStatement pstmt = con.prepareStatement(s);
+        int c =0;
+        for (String x:ls) {
+            if (c>=100){
+                pstmt.executeBatch();
+                c=0;
+            }
+            pstmt.setString(1,x);
+            c++;
+        }
+        pstmt.executeBatch();
+    }
+
 }
