@@ -36,6 +36,8 @@ public class DbHelper {
         tables.add("symbols");
         tables.add("companies");
         tables.add("logos");
+        tables.add("stats_basic");
+        tables.add("nq100");
 
         Statement stmt;
         for(String x:tables) {
@@ -110,6 +112,40 @@ public class DbHelper {
         stmt.executeUpdate(sb.toString());
         stmt.close();
         sb.delete(0, sb.length());
+        ////////////////////////////////
+        sb.append("CREATE TABLE stats_basic(");
+        sb.append("companyName VARCHAR(200) PRIMARY KEY,");
+        sb.append("marketcap BIGINT,");
+        sb.append("week52high DOUBLE PRECISION,");
+        sb.append("week52low DOUBLE PRECISION,");
+        sb.append("week52highSplitAdjustOnly DOUBLE PRECISION,");
+        sb.append("week52lowSplitAdjustOnly DOUBLE PRECISION,");
+        sb.append("week52change DOUBLE PRECISION,");
+        sb.append("sharesOutstanding BIGINT,");
+        sb.append("floatNum BIGINT,");
+        sb.append("avg10Volume BIGINT,");
+        sb.append("avg30Volume BIGTINT,");
+        sb.append("day200MovingAvg DOUBLE PRECISION,");
+        sb.append("day50MovingAvg DOUBLE PRECISION,");
+        sb.append("employees BIGINT,");
+        sb.append("ttmEPS DOUBLE PRECISION,");
+        sb.append("ttmDividendRate DOUBLE PRECISION,");
+        sb.append("dividendYield DOUBLE PRECISION,");
+        sb.append("nextDividendDate VARCHAR(100),");
+        sb.append("exDividendDate VARCHAR(100),");
+        sb.append("nextEarningsDate VARCHAR(100),");
+        sb.append("peRatio DOUBLE PRECISION,");
+        sb.append("beta DOUBLE PRECISION,");
+        sb.append("maxChangePercent DOUBLE PRECISION,");
+        sb.append("year5ChangePercent DOUBLE PRECISION,");
+        sb.append("year2ChangePercent DOUBLE PRECISION,");
+        sb.append("year1ChangePercent DOUBLE PRECISION,");
+        sb.append("ytdChangePercent DOUBLE PRECISION,");
+        sb.append("month6ChangePercent DOUBLE PRECISION,");
+        sb.append("month3ChangePercent DOUBLE PRECISION,");
+        sb.append("month1ChangePercent DOUBLE PRECISION,");
+        sb.append("day30ChangePercent DOUBLE PRECISION,");
+        sb.append("day5ChangePercent DOUBLE PRECISION)");
 
 
     }
