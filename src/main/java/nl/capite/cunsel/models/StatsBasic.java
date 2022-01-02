@@ -1,13 +1,16 @@
 package nl.capite.cunsel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.capite.cunsel.interfaces.GenericIdInterface;
 
 import javax.persistence.Id;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StatsBasic implements GenericIdInterface {
     @Id
+    private String ticker;
     private String companyName;
     private long marketcap;
     private double week52high;
@@ -45,7 +48,8 @@ public class StatsBasic implements GenericIdInterface {
     public StatsBasic() {
     }
 
-    public StatsBasic(String companyName, long marketcap, double week52high, double week52low, double week52highSplitAdjustOnly, double week52lowSplitAdjustOnly, double week52change, long sharesOutstanding, long floatNum, long avg10Volume, long avg30Volume, double day200MovingAvg, double day50MovingAvg, long employees, double ttmEPS, double ttmDividendRate, double dividendYield, String nextDividendDate, String exDividendDate, String nextEarningsDate, double peRatio, double beta, double maxChangePercent, double year5ChangePercent, double year2ChangePercent, double year1ChangePercent, double ytdChangePercent, double month6ChangePercent, double month3ChangePercent, double month1ChangePercent, double day30ChangePercent, double day5ChangePercent) {
+    public StatsBasic(String ticker, String companyName, long marketcap, double week52high, double week52low, double week52highSplitAdjustOnly, double week52lowSplitAdjustOnly, double week52change, long sharesOutstanding, long floatNum, long avg10Volume, long avg30Volume, double day200MovingAvg, double day50MovingAvg, long employees, double ttmEPS, double ttmDividendRate, double dividendYield, String nextDividendDate, String exDividendDate, String nextEarningsDate, double peRatio, double beta, double maxChangePercent, double year5ChangePercent, double year2ChangePercent, double year1ChangePercent, double ytdChangePercent, double month6ChangePercent, double month3ChangePercent, double month1ChangePercent, double day30ChangePercent, double day5ChangePercent) {
+        this.ticker = ticker;
         this.companyName = companyName;
         this.marketcap = marketcap;
         this.week52high = week52high;
@@ -78,6 +82,14 @@ public class StatsBasic implements GenericIdInterface {
         this.month1ChangePercent = month1ChangePercent;
         this.day30ChangePercent = day30ChangePercent;
         this.day5ChangePercent = day5ChangePercent;
+    }
+
+    public String getTicker() {
+        return ticker;
+    }
+
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
     public String getCompanyName() {
@@ -341,16 +353,16 @@ public class StatsBasic implements GenericIdInterface {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatsBasic that = (StatsBasic) o;
-        return marketcap == that.marketcap && Double.compare(that.week52high, week52high) == 0 && Double.compare(that.week52low, week52low) == 0 && Double.compare(that.week52highSplitAdjustOnly, week52highSplitAdjustOnly) == 0 && Double.compare(that.week52lowSplitAdjustOnly, week52lowSplitAdjustOnly) == 0 && Double.compare(that.week52change, week52change) == 0 && sharesOutstanding == that.sharesOutstanding && floatNum == that.floatNum && avg10Volume == that.avg10Volume && avg30Volume == that.avg30Volume && Double.compare(that.day200MovingAvg, day200MovingAvg) == 0 && Double.compare(that.day50MovingAvg, day50MovingAvg) == 0 && employees == that.employees && Double.compare(that.ttmEPS, ttmEPS) == 0 && Double.compare(that.ttmDividendRate, ttmDividendRate) == 0 && Double.compare(that.dividendYield, dividendYield) == 0 && Double.compare(that.peRatio, peRatio) == 0 && Double.compare(that.beta, beta) == 0 && Double.compare(that.maxChangePercent, maxChangePercent) == 0 && Double.compare(that.year5ChangePercent, year5ChangePercent) == 0 && Double.compare(that.year2ChangePercent, year2ChangePercent) == 0 && Double.compare(that.year1ChangePercent, year1ChangePercent) == 0 && Double.compare(that.ytdChangePercent, ytdChangePercent) == 0 && Double.compare(that.month6ChangePercent, month6ChangePercent) == 0 && Double.compare(that.month3ChangePercent, month3ChangePercent) == 0 && Double.compare(that.month1ChangePercent, month1ChangePercent) == 0 && Double.compare(that.day30ChangePercent, day30ChangePercent) == 0 && Double.compare(that.day5ChangePercent, day5ChangePercent) == 0 && Objects.equals(companyName, that.companyName) && Objects.equals(nextDividendDate, that.nextDividendDate) && Objects.equals(exDividendDate, that.exDividendDate) && Objects.equals(nextEarningsDate, that.nextEarningsDate);
+        return marketcap == that.marketcap && Double.compare(that.week52high, week52high) == 0 && Double.compare(that.week52low, week52low) == 0 && Double.compare(that.week52highSplitAdjustOnly, week52highSplitAdjustOnly) == 0 && Double.compare(that.week52lowSplitAdjustOnly, week52lowSplitAdjustOnly) == 0 && Double.compare(that.week52change, week52change) == 0 && sharesOutstanding == that.sharesOutstanding && floatNum == that.floatNum && avg10Volume == that.avg10Volume && avg30Volume == that.avg30Volume && Double.compare(that.day200MovingAvg, day200MovingAvg) == 0 && Double.compare(that.day50MovingAvg, day50MovingAvg) == 0 && employees == that.employees && Double.compare(that.ttmEPS, ttmEPS) == 0 && Double.compare(that.ttmDividendRate, ttmDividendRate) == 0 && Double.compare(that.dividendYield, dividendYield) == 0 && Double.compare(that.peRatio, peRatio) == 0 && Double.compare(that.beta, beta) == 0 && Double.compare(that.maxChangePercent, maxChangePercent) == 0 && Double.compare(that.year5ChangePercent, year5ChangePercent) == 0 && Double.compare(that.year2ChangePercent, year2ChangePercent) == 0 && Double.compare(that.year1ChangePercent, year1ChangePercent) == 0 && Double.compare(that.ytdChangePercent, ytdChangePercent) == 0 && Double.compare(that.month6ChangePercent, month6ChangePercent) == 0 && Double.compare(that.month3ChangePercent, month3ChangePercent) == 0 && Double.compare(that.month1ChangePercent, month1ChangePercent) == 0 && Double.compare(that.day30ChangePercent, day30ChangePercent) == 0 && Double.compare(that.day5ChangePercent, day5ChangePercent) == 0 && Objects.equals(ticker, that.ticker) && Objects.equals(companyName, that.companyName) && Objects.equals(nextDividendDate, that.nextDividendDate) && Objects.equals(exDividendDate, that.exDividendDate) && Objects.equals(nextEarningsDate, that.nextEarningsDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(companyName, marketcap, week52high, week52low, week52highSplitAdjustOnly, week52lowSplitAdjustOnly, week52change, sharesOutstanding, floatNum, avg10Volume, avg30Volume, day200MovingAvg, day50MovingAvg, employees, ttmEPS, ttmDividendRate, dividendYield, nextDividendDate, exDividendDate, nextEarningsDate, peRatio, beta, maxChangePercent, year5ChangePercent, year2ChangePercent, year1ChangePercent, ytdChangePercent, month6ChangePercent, month3ChangePercent, month1ChangePercent, day30ChangePercent, day5ChangePercent);
+        return Objects.hash(ticker, companyName, marketcap, week52high, week52low, week52highSplitAdjustOnly, week52lowSplitAdjustOnly, week52change, sharesOutstanding, floatNum, avg10Volume, avg30Volume, day200MovingAvg, day50MovingAvg, employees, ttmEPS, ttmDividendRate, dividendYield, nextDividendDate, exDividendDate, nextEarningsDate, peRatio, beta, maxChangePercent, year5ChangePercent, year2ChangePercent, year1ChangePercent, ytdChangePercent, month6ChangePercent, month3ChangePercent, month1ChangePercent, day30ChangePercent, day5ChangePercent);
     }
 
     @Override
     public String getGenericId() {
-        return this.companyName;
+        return this.ticker;
     }
 }
