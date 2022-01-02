@@ -3,6 +3,7 @@ package nl.capite.cunsel.Helpers;
 import nl.capite.cunsel.interfaces.GenericIdInterface;
 import nl.capite.cunsel.models.Company;
 import nl.capite.cunsel.models.Logo;
+import nl.capite.cunsel.models.StatsBasic;
 import nl.capite.cunsel.models.refSymbol;
 
 import java.sql.*;
@@ -124,7 +125,7 @@ public class DbHelper {
         sb.append("sharesOutstanding BIGINT,");
         sb.append("floatNum BIGINT,");
         sb.append("avg10Volume BIGINT,");
-        sb.append("avg30Volume BIGTINT,");
+        sb.append("avg30Volume BIGINT,");
         sb.append("day200MovingAvg DOUBLE PRECISION,");
         sb.append("day50MovingAvg DOUBLE PRECISION,");
         sb.append("employees BIGINT,");
@@ -146,6 +147,10 @@ public class DbHelper {
         sb.append("month1ChangePercent DOUBLE PRECISION,");
         sb.append("day30ChangePercent DOUBLE PRECISION,");
         sb.append("day5ChangePercent DOUBLE PRECISION)");
+        stmt = con.createStatement();
+        stmt.executeUpdate(sb.toString());
+        stmt.close();
+        sb.delete(0, sb.length());
 
 
     }
