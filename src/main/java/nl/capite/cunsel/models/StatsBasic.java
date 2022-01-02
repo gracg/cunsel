@@ -1,11 +1,12 @@
 package nl.capite.cunsel.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.capite.cunsel.interfaces.GenericIdInterface;
 
 import javax.persistence.Id;
 import java.util.Objects;
 
-public class StatsBasic {
+public class StatsBasic implements GenericIdInterface {
     @Id
     private String companyName;
     private long marketcap;
@@ -346,5 +347,10 @@ public class StatsBasic {
     @Override
     public int hashCode() {
         return Objects.hash(companyName, marketcap, week52high, week52low, week52highSplitAdjustOnly, week52lowSplitAdjustOnly, week52change, sharesOutstanding, floatNum, avg10Volume, avg30Volume, day200MovingAvg, day50MovingAvg, employees, ttmEPS, ttmDividendRate, dividendYield, nextDividendDate, exDividendDate, nextEarningsDate, peRatio, beta, maxChangePercent, year5ChangePercent, year2ChangePercent, year1ChangePercent, ytdChangePercent, month6ChangePercent, month3ChangePercent, month1ChangePercent, day30ChangePercent, day5ChangePercent);
+    }
+
+    @Override
+    public String getGenericId() {
+        return this.companyName;
     }
 }
