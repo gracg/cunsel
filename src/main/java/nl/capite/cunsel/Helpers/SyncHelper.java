@@ -2,10 +2,7 @@ package nl.capite.cunsel.Helpers;
 
 import nl.capite.cunsel.exceptions.UncompatibleClasses;
 import nl.capite.cunsel.interfaces.GenericIdInterface;
-import nl.capite.cunsel.models.Company;
-import nl.capite.cunsel.models.Logo;
-import nl.capite.cunsel.models.refSymbol;
-import nl.capite.cunsel.models.syncGenericResult;
+import nl.capite.cunsel.models.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -99,6 +96,19 @@ public class SyncHelper implements  Runnable {
         dbh.deleteLogos(sgr.getDeleteables());
     }
 
+    public void syncStatsBasic() throws SQLException, IOException, UncompatibleClasses {
+        List<String> tickers = dbh.getTickers();
+
+        ArrayList<StatsBasic> stats = (ArrayList<StatsBasic>) iex.getStatsBasic(tickers);
+        HashMap<String, StatsBasic> hm = dbh.getStatsBasicMap();
+
+        syncGenericResult sgr = GenericObjectSync(hm,stats);
+
+        dbh.insertStasBasic((List<StatsBasic>) sgr.getInsertables());
+        dbh.updateStatsBasic((List<StatsBasic>) sgr.getUpdateables());
+        dbh.deleteStatsBasic(sgr.getDeleteables());
+    }
+
     public void SyncRefSymbols() throws SQLException, IOException, UncompatibleClasses {
         List<refSymbol> symbols = iex.getSymbols();
         nqHelper nq = new nqHelper();
@@ -159,6 +169,16 @@ public class SyncHelper implements  Runnable {
                     e.printStackTrace();
                 }
             });
+            Thread t4 = new Thread(() -> {
+               try {
+                   this.syncStatsBasic();
+               }catch (SQLException e) {
+                   e.printStackTrace();
+               } catch (IOException | UncompatibleClasses e) {
+                   e.printStackTrace();
+               }
+            });
+
             t1.start();
             try {
                 t1.join();
@@ -167,10 +187,12 @@ public class SyncHelper implements  Runnable {
             }
             t2.start();
             t3.start();
+            t4.start();
 
             try {
                 t2.join();
                 t3.join();
+                t4.join();
                 this.runThread=false;
             } catch (InterruptedException e) {
                 e.printStackTrace();
