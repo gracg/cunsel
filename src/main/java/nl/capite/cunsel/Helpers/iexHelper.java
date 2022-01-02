@@ -181,6 +181,7 @@ public class iexHelper {
 
             try {
                 var t = mapper.readValue(bodStr,StatsBasic.class);
+                t.setTicker(x);
                 stats.add(t);
             } catch (JsonParseException E) {
                 continue;
