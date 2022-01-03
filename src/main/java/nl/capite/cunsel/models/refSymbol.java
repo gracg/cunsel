@@ -1,6 +1,8 @@
 package nl.capite.cunsel.models;
 
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import nl.capite.cunsel.interfaces.GenericIdInterface;
 
@@ -195,6 +197,7 @@ public class refSymbol implements GenericIdInterface {
         return Objects.hash(getSymbol(), getExchange(), getExchangeSuffix(), getExchangeName(), getExchangeSegment(), getExchangeSegmentName(), getName(), getType(), getIexId(), getRegion(), getCurrency(), isEnabled(), getFigi(), getCik(), getLei());
     }
 
+    @JsonIgnore
     @Override
     public String getGenericId() {
         return symbol;
