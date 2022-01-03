@@ -15,5 +15,5 @@ public class StatsBasicService {
     StatsBasicRepository repo;
 
     public List<StatsBasic> getStatsBasic() {return repo.getStatsBasic();}
-    public StatsBasic getStatsBasicForSymbol(String symbol){return repo.getStatsBasic(symbol);}
+    public StatsBasic getStatsBasicForSymbol(String symbol){return repo.getStatsBasic(symbol.toUpperCase());}
 }

@@ -19,6 +19,6 @@ public class LogoService {
     }
 
     public Logo getLogo(String symbol) {
-        return repo.getLogo(symbol);
+        return repo.getLogo(symbol.toUpperCase());
     }
 }
