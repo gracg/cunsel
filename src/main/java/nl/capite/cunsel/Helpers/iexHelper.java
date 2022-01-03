@@ -2,10 +2,7 @@ package nl.capite.cunsel.Helpers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.capite.cunsel.models.Company;
-import nl.capite.cunsel.models.Logo;
-import nl.capite.cunsel.models.StatsBasic;
-import nl.capite.cunsel.models.refSymbol;
+import nl.capite.cunsel.models.*;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -189,6 +186,18 @@ public class iexHelper {
 
         }
         return stats;
+    }
+
+    public Quote getQuote(String ticker) throws IOException {
+        HttpUrl url = urlBuilder("/stable/stock/" + ticker +"/quote",null);
+        System.out.println(url.url().getPath());
+        Request req = new Request.Builder()
+                .url(url)
+                .build();
+        Response res = client.newCall(req).execute();
+        var bodStr = res.body().string();
+        var t = mapper.readValue(bodStr,Quote.class);
+        return t;
     }
 
 }
