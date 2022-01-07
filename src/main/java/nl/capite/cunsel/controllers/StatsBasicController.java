@@ -19,13 +19,13 @@ public class StatsBasicController {
     StatsBasicService ser;
 
     @CrossOrigin
-    @GetMapping("/api/stats-basic")
+    @GetMapping("/api/x/stats-basic")
     public List<StatsBasic> getStatsBasic(){
         return ser.getStatsBasic();
     }
 
     @CrossOrigin
-    @GetMapping("/api/stats-basic/{symbol}")
+    @GetMapping("/api/x/stats-basic/{symbol}")
     StatsBasic getLogo(@PathVariable String symbol) {
         return ser.getStatsBasicForSymbol(symbol);
     }

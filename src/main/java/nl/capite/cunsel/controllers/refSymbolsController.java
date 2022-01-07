@@ -18,12 +18,12 @@ public class refSymbolsController {
     RefSymbolService ser;
 
     @CrossOrigin
-    @GetMapping("/api/symbols")
+    @GetMapping("/api/x/symbols")
     public List<refSymbol> getRefSymbols() {
         return ser.getRefSymbols();
     }
 
     @CrossOrigin
-    @GetMapping("/api/symbols/cs")
+    @GetMapping("/api/x/symbols/cs")
     public List<refSymbol> getCommonStock(){return ser.getRefSymbolsForCommonStock();}
 }

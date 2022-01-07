@@ -16,7 +16,7 @@ public class quoteController {
     @Autowired
     iexService ser;
 
-    @GetMapping("/api/quote/{symbol}")
+    @GetMapping("/api/x/quote/{symbol}")
     Quote getLogo(@PathVariable String symbol) throws IOException {
         return ser.getQuote(symbol.toUpperCase());
     }

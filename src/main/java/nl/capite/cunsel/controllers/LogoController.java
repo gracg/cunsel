@@ -17,13 +17,13 @@ public class LogoController {
     LogoService ser;
 
     @CrossOrigin
-    @GetMapping("/api/logos")
+    @GetMapping("/api/x/logos")
     List<Logo> getLogos(){
         return ser.getLogos();
     }
 
     @CrossOrigin
-    @GetMapping("/api/logos/{symbol}")
+    @GetMapping("/api/x/logos/{symbol}")
     Logo getLogo(@PathVariable String symbol) {
         return ser.getLogo(symbol);
     }

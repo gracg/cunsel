@@ -18,7 +18,7 @@ public class CompanyController {
     CompanyService ser;
 
     @CrossOrigin
-    @GetMapping("/api/companies")
+    @GetMapping("/api/x/companies")
     public List<Company> getRefSymbols() {
         return ser.getCompanies();
     }
