@@ -1,6 +1,7 @@
 package nl.capite.cunsel.Helpers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.capite.cunsel.models.*;
 import okhttp3.*;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class iexHelper {
     private final String apikey;
@@ -198,6 +200,28 @@ public class iexHelper {
         var bodStr = res.body().string();
         var t = mapper.readValue(bodStr,Quote.class);
         return t;
+    }
+
+    public List<BatchQuote> getBatchQuotes(List<String> tickers) throws IOException {
+        HashMap<String,String> urlParams = new HashMap<>();
+        urlParams.put("symbols",tickers.stream().collect(Collectors.joining(",")));
+        urlParams.put("types","quote");
+
+        HttpUrl url = urlBuilder("/stable/stock/market/batch",urlParams);
+        System.out.println(url.url().getPath());
+        Request req = new Request.Builder()
+                .url(url)
+                .build();
+        Response res = client.newCall(req).execute();
+        var bodStr = res.body().string();
+
+        ObjectMapper mapper = new ObjectMapper();
+        var t = mapper.readValue(bodStr, new TypeReference<Map<String,BatchQuoteNode>>() {});
+        List<BatchQuote> ls = new ArrayList<>();
+        t.entrySet().forEach(n -> ls.add(new BatchQuote(n.getKey(),n.getValue().getQuote())));
+
+
+        return ls;
     }
 
 }
