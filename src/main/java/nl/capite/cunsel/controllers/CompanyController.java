@@ -7,6 +7,7 @@ import nl.capite.cunsel.services.RefSymbolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,6 +23,13 @@ public class CompanyController {
     public List<Company> getRefSymbols() {
         return ser.getCompanies();
     }
+
+    @CrossOrigin
+    @GetMapping("/api/x/company/{symbol}")
+    public Company getCompany(@PathVariable String symbol) {
+        return ser.getCompany(symbol.toUpperCase());
+    }
+
 
 
 }
