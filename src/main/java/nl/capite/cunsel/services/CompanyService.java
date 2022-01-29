@@ -16,4 +16,8 @@ public class CompanyService {
     CompanyRepository repo;
 
     public List<Company> getCompanies(){return repo.getCompanies();}
+
+    public Company getCompany(String symbol) {
+        return repo.getCompany(symbol.toUpperCase());
+    }
 }
