@@ -34,4 +34,29 @@ public interface CompanyRepository extends CrudRepository<Company, String> {
             "phone " +
             "FROM COMPANIES",nativeQuery = true)
     public List<Company> getCompanies();
+
+    @Query(value = "SELECT " +
+            "symbol," +
+            "companyName as company_name," +
+            "exchange," +
+            "industry," +
+            "website," +
+            "description,"+
+            "ceo as ceo," +
+            "securityName as security_name," +
+            "issueType as issue_type," +
+            "sector," +
+            "primarySicCode as primary_sic_code," +
+            "employees," +
+            "tags as tags," +
+            "address," +
+            "address2," +
+            "state," +
+            "city," +
+            "zip," +
+            "country," +
+            "phone " +
+            "FROM COMPANIES " +
+            "WHERE symbol=?1",nativeQuery = true)
+    public Company getCompany(String symbol);
 }
