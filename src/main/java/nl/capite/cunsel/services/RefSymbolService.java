@@ -19,4 +19,8 @@ public class RefSymbolService {
     }
 
     public List<refSymbol> getRefSymbolsForCommonStock(){return repo.getRefSymbolsForCommonStock();}
+
+    public refSymbol getRefSymbol(String symbol) {
+        return repo.getRefSymbol(symbol.toUpperCase());
+    }
 }
